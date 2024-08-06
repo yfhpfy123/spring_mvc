@@ -12,11 +12,11 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name = "name")
+    @Column
     private String name;
-    @Column(name = "last_name")
+    @Column
     private String lastName;
-    @Column(name = "age")
+    @Column
     private int age;
 
     public User() {

@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -43,6 +44,7 @@ public class AppConfig {
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManager (){
+        HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         Properties hibarnateProperties = new Properties();
         hibarnateProperties.setProperty("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
         hibarnateProperties.setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
@@ -50,7 +52,7 @@ public class AppConfig {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(getDataSource());
         em.setPackagesToScan("web.model");
-        em.setJpaVendorAdapter(new org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter());
+        em.setJpaVendorAdapter(vendorAdapter);
         em.setJpaProperties(hibarnateProperties);
         return em;
     }
