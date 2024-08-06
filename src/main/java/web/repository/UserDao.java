@@ -39,10 +39,7 @@ public class UserDao implements Dao {
             user.setName(updatedUser.getName());
             user.setLastName(updatedUser.getLastName());
             user.setAge(updatedUser.getAge());
-        } else {
-            throw new IllegalArgumentException();
         }
-
     }
 
     @Override
@@ -50,8 +47,6 @@ public class UserDao implements Dao {
         User user = entityManager.find(User.class, id);
         if (user != null) {
             entityManager.remove(user);
-        } else {
-            throw new IllegalArgumentException();
         }
     }
 
