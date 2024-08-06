@@ -9,7 +9,6 @@ import web.model.User;
 import web.service.UserService;
 
 @Controller
-@RequestMapping("/users")
 public class UsersController {
 
 
@@ -19,19 +18,19 @@ public class UsersController {
         this.userService = userService;
     }
 
-    @GetMapping
+    @GetMapping("/users")
     public String index(ModelMap model) {
         model.addAttribute("users", userService.findAll());
         return "users/index";
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("users/{id}")
     public String show(int id, ModelMap model) {
         model.addAttribute("user", userService.findOne(id));
         return "users/show";
     }
 
-    @GetMapping("/new")
+    @GetMapping("users/new")
     public String newUser(@ModelAttribute("user") User user) {
         return "users/new";
     }
@@ -44,12 +43,12 @@ public class UsersController {
         userService.save(user);
         return "redirect:/users";
     }
-    @GetMapping("/{id}/edit")
+    @GetMapping("users/{id}/edit")
     public String edit(ModelMap model, int id) {
         model.addAttribute("user", userService.findOne(id));
         return "users/edit";
     }
-    @PostMapping("/{id}")
+    @PostMapping("users/{id}")
     public String update(@RequestParam("id") int id, @ModelAttribute("user") User updatedUser, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "users/edit";
@@ -57,7 +56,7 @@ public class UsersController {
         userService.update(id, updatedUser);
         return "redirect:/users";
     }
-    @PostMapping("/{id}/delete")
+    @PostMapping("users/{id}/delete")
     public String delete(int id) {
         userService.delete(id);
         return "redirect:/users";

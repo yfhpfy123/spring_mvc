@@ -11,12 +11,9 @@ public interface Dao {
 
     User findOne(int id);
 
-    @Transactional
     void save(User user);
 
-    @Transactional
     void update(int id, User updatedUser);
 
-    @Transactional
     void delete(int id);
 }
