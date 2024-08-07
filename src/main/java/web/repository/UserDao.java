@@ -1,5 +1,6 @@
 package web.repository;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,8 +13,13 @@ import java.util.List;
 
 @Repository
 public class UserDao implements Dao {
-    @PersistenceContext(unitName = "entityManager")
+    @PersistenceContext
     private EntityManager entityManager;
+    @Autowired
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
+        System.out.println("entityManager created");
+    }
 
     @Override
     public List<User> findAll() {

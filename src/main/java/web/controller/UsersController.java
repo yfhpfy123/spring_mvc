@@ -7,14 +7,15 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import web.model.User;
 import web.service.UserService;
+import web.service.UserServiceImpl;
 
 @Controller
 public class UsersController {
 
 
-    private final UserService userService;
+    private UserService userService;
     @Autowired
-    public UsersController(UserService userService) {
+    public void setUsersController(UserServiceImpl userService) {
         this.userService = userService;
     }
 

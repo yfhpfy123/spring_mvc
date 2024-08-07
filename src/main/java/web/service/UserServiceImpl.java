@@ -5,24 +5,37 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import web.model.User;
 import web.repository.Dao;
+import web.repository.UserDao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
 public class UserServiceImpl implements UserService {
 
-    private final Dao userDao;
+    private Dao userDao;
 
     @Autowired
-    public UserServiceImpl(Dao rep) {
-        this.userDao = rep;
+    public void setUserServiceImpl(UserDao dao) {
+        this.userDao = dao;
+        System.out.println("userServiceImpl created");
     }
     
     @Override
     public List<User> findAll() {
-        return userDao.findAll();
+        List<User> users = new ArrayList<>();
+        if (userDao != null) {
+            users = userDao.findAll();
+            System.out.println("user dao not null");
+            return users;
+        } else {
+            users.add(new User("null", "null", 0));
+            System.out.println("user dao null");
+            return users;
+        }
     }
+
     @Override
     public User findOne(int id) {
         User user = userDao.findOne(id);

@@ -6,7 +6,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -22,13 +21,12 @@ import java.util.Properties;
 @PropertySource("classpath:db.properties")
 @EnableTransactionManagement
 @ComponentScan(value = "web")
-@EnableJpaRepositories(basePackages = "web.repository")
 @EnableWebMvc
 public class AppConfig {
 
-    private final Environment env;
+    private Environment env;
     @Autowired
-    public AppConfig(Environment env) {
+    public void setAppConfig(Environment env) {
         this.env = env;
     }
 
