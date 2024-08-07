@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findOne(int id) {
+    public User findOne(Long id) {
         return userDaoImpl.findOne(id);
     }
 
@@ -35,13 +35,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void update(int id, User updatedUser) {
+    public void update(Long id, User updatedUser) {
         userDaoImpl.update(id, updatedUser);
     }
 
     @Override
     @Transactional
-    public void delete(int id) {
+    public void delete(Long id) {
        userDaoImpl.delete(id);
     }
 }

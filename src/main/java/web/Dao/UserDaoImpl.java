@@ -28,7 +28,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User findOne(int id) {
+    public User findOne(Long id) {
         TypedQuery<User> query = entityManager.createQuery("select u from User u where u.id = :id", User.class);
         query.setParameter("id", id);
         return query.getResultList().stream().findAny().orElse(null);
@@ -40,17 +40,13 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void update(int id, User updatedUser) {
-        User user = entityManager.find(User.class, id);
-        if (user != null) {
-            user.setName(updatedUser.getName());
-            user.setEmail(updatedUser.getEmail());
-            user.setPassword(updatedUser.getPassword());
-        }
+    public void update(Long id, User updatedUser) {
+        updatedUser.setId(id);
+        entityManager.persist(updatedUser);
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(Long id) {
         User user = entityManager.find(User.class, id);
         if (user != null) {
             entityManager.remove(user);
