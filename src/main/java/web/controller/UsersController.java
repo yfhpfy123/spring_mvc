@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import web.model.User;
 import web.service.UserService;
 
@@ -54,11 +55,16 @@ public class UsersController {
     }
 
     @GetMapping("/delete")
-    public String delete(@RequestParam("id") Long id) {
-        if (userServiceImpl.findOne(id) == null) {
+    public String delete(@RequestParam("id") Long id, RedirectAttributes redirectAttributes) {
+        User user = userServiceImpl.findOne(id);
+
+        if (user == null) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Пользователь не найден!");
             return "redirect:/users";
         }
+
         userServiceImpl.delete(id);
+        redirectAttributes.addFlashAttribute("successMessage", "Пользователь успешно удален!");
         return "redirect:/users";
     }
 
