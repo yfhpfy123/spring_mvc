@@ -53,11 +53,11 @@
     <h1>Редактировать пользователя</h1>
     <form th:action="@{/users/update?id={id}(id=${user.id})}" method="post">
         <label for="name">ФИО:</label>
-        <input type="text" id="name" name="name" required><br>
+        <input type="text" id="name" name="name" th:value="${user.name}" required><br>
         <label for="email">Логин:</label>
-        <input type="email" id="email" name="email" required><br>
+        <input type="email" id="email" name="email" th:value="${user.email}" required><br>
         <label for="password">Пароль:</label>
-        <input type="password" id="password" name="password" required><br>
+        <input type="password" id="password" name="password" th:value="${user.password}" required><br>
         <input type="submit" value="Сохранить">
         <input type="button" value="Отмена"
                style="background-color: #dc3545;
