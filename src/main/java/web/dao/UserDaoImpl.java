@@ -1,4 +1,4 @@
-package web.Dao;
+package web.dao;
 
 import org.springframework.stereotype.Repository;
 import web.model.User;
@@ -14,12 +14,12 @@ public class UserDaoImpl implements UserDao {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public UserDaoImpl(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
-
     private UserDaoImpl() {
 
+    }
+
+    public UserDaoImpl(EntityManager entityManager) {
+        this.entityManager = entityManager;
     }
 
     @Override

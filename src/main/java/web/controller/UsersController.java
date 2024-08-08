@@ -30,7 +30,7 @@ public class UsersController {
     }
 
     @GetMapping("/new")
-    public String newUser(ModelMap model) {
+    public String createUser(ModelMap model) {
         model.addAttribute("user", new User());
         return "users/new";
     }
@@ -55,6 +55,9 @@ public class UsersController {
 
     @GetMapping("/delete")
     public String delete(@RequestParam("id") Long id) {
+        if (userServiceImpl.findOne(id) == null) {
+            return "redirect:/users";
+        }
         userServiceImpl.delete(id);
         return "redirect:/users";
     }
