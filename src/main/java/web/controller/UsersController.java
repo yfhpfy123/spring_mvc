@@ -8,6 +8,7 @@ import web.model.User;
 import web.service.UserService;
 
 @Controller
+@RequestMapping("/users")
 public class UsersController {
 
     private final UserService userServiceImpl;
@@ -16,43 +17,43 @@ public class UsersController {
     public UsersController(UserService userService) {
         this.userServiceImpl = userService;
     }
-    @GetMapping("/users")
+    @GetMapping()
     public String findAll(ModelMap model) {
         model.addAttribute("users", userServiceImpl.findAll());
-        return "users";
+        return "users/all";
     }
 
     @GetMapping("/user")
     public String findOne(@RequestParam("id") Long id, ModelMap model) {
         model.addAttribute("user", userServiceImpl.findOne(id));
-        return "user";
+        return "users/user";
     }
 
-    @GetMapping("users/new")
-    public String save(ModelMap model) {
+    @GetMapping("/new")
+    public String newUser(ModelMap model) {
         model.addAttribute("user", new User());
-        return "new";
+        return "users/new";
     }
 
-    @PostMapping("/users/save")
+    @PostMapping("/save")
     public String save(@ModelAttribute User user) {
         userServiceImpl.save(user);
         return "redirect:/users";
     }
 
-    @GetMapping("/users/edit")
-    public String update(@RequestParam("id") Long id, ModelMap model) {
+    @GetMapping("/edit")
+    public String edit(@RequestParam("id") Long id, ModelMap model) {
         model.addAttribute("user", userServiceImpl.findOne(id));
-        return "edit";
+        return "users/edit";
     }
 
-    @PostMapping("/users/update")
-    public String update(@ModelAttribute User user) {
-        userServiceImpl.update(user.getId(), user);
+    @PostMapping("/update")
+    public String update(@ModelAttribute User user, @RequestParam("id") Long id) {
+        userServiceImpl.update(id, user);
         return "redirect:/users";
     }
 
-    @GetMapping("/users/delete")
+    @GetMapping("/delete")
     public String delete(@RequestParam("id") Long id) {
         userServiceImpl.delete(id);
         return "redirect:/users";

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Детали пользователя</title>
@@ -46,13 +46,13 @@
         </div>
         <div class="card-body">
             <p class="card-text"><strong>ID:</strong> <span th:text="${user.id}">ID</span></p>
-            <p class="card-text"><strong>Имя:</strong> <span th:text="${user.name}">Имя</span></p>
-            <p class="card-text"><strong>Электронная почта:</strong> <span th:text="${user.email}">Электронная почта</span></p>
-
+            <p class="card-text"><strong>ФИО:</strong> <span th:text="${user.name}">ФИО</span></p>
+            <p class="card-text"><strong>логин:</strong> <span th:text="${user.email}">логин</span></p>
+            <p class="card-text"><strong>пароль:</strong> <span th:text="${user.password}">пароль</span></p>
             <div>
                 <a th:href="@{/users/edit?id={id}(id=${user.id})}" class="btn btn-primary">Изменить</a>
                 <a th:href="@{/users/delete?id={id}(id=${user.id})}" class="btn btn-danger">Удалить</a>
-                <a th:href="@{/users}" class="btn btn-secondary">Назад к списку пользователей</a>
+                <a th:href="@{/users}" class="btn btn-danger">Назад к списку пользователей</a>
             </div>
         </div>
     </div>
