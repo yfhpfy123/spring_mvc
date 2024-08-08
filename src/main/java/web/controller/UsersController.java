@@ -59,12 +59,9 @@ public class UsersController {
         User user = userServiceImpl.findOne(id);
 
         if (user == null) {
-            redirectAttributes.addFlashAttribute("errorMessage", "Пользователь не найден!");
-            return "redirect:/users";
+            throw new IllegalArgumentException("Пользователь не найден!");
         }
-
         userServiceImpl.delete(id);
-        redirectAttributes.addFlashAttribute("successMessage", "Пользователь успешно удален!");
         return "redirect:/users";
     }
 
