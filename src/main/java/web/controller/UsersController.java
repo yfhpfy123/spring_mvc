@@ -55,7 +55,7 @@ public class UsersController {
     }
 
     @GetMapping("/delete")
-    public String delete(@RequestParam("id") Long id, RedirectAttributes redirectAttributes) {
+    public String delete(@RequestParam("id") Long id) {
         User user = userServiceImpl.findOne(id);
 
         if (user == null) {
